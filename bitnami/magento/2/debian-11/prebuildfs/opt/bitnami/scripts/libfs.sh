@@ -172,10 +172,10 @@ configure_permissions_ownership() {
         if [[ -e "$p" ]]; then
             find -L "$p" -printf ""
             if [[ -n $dir_mode ]]; then
-                find -L "$p" -print0 -type d ! -perm $dir_mode | xargs -r -0 chmod "$dir_mode"
+                find -L "$p" -type d ! -perm $dir_mode -print0 | xargs -r -0 chmod "$dir_mode"
             fi
             if [[ -n $file_mode ]]; then
-                find -L "$p" -print0 -type f ! -perm $file_mode | xargs -r -0 chmod "$file_mode"
+                find -L "$p" -type f ! -perm $file_mode -print0 | xargs -r -0 chmod "$file_mode"
             fi
             if [[ -n $user ]] && [[ -n $group ]]; then
                 find -L "$p" -print0 | xargs -r -0 chown "${user}:${group}"
